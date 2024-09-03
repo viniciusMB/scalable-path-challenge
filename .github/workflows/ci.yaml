@@ -1,0 +1,39 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [feature/**, hotfix/**, refactor/**]
+  pull_request:
+    branches: [master, release, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Setup Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      - name: Start RabbitMQ Service
+        run: docker-compose up -d rabbitmq
+
+      - name: Install dependencies
+        run: npm install --frozen-lockfile
+
+      - name: Build (if is available)
+        run: npm run build
+
+      - name: Test
+        run: npm run test
+
+      - name: Test End-to-End
+        run: npm run test:e2e

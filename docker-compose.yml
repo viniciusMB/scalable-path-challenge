@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"  # Mapeia a porta do contêiner para a porta do host
+    environment:
+      POSTGRES_USER: postgres  # Usuário padrão do PostgreSQL
+      POSTGRES_PASSWORD: postgrespassword  # Senha definida para o usuário postgres
+      POSTGRES_DB: mydatabase  # Nome do banco de dados padrão
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # Volume para persistência de dados
+
+volumes:
+  pgdata:
+    driver: local
