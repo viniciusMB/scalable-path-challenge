@@ -1,0 +1,38 @@
+{
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".*\\.spec\\.ts$",
+  "coveragePathIgnorePatterns": [
+    "tests",
+    "test",
+    "\\.module\\.ts$",
+    "interface",
+    "interfaces",
+    "enums",
+    "dtos",
+    "config",
+    "configs",
+    "src/main.ts"
+  ],
+  "collectCoverageFrom": ["src/**/*.(t|j)s"],
+  "transform": {
+    "^.+\\.ts$": "ts-jest"
+  },
+  "coverageThreshold": {
+    "global": {
+      "branches": 70,
+      "functions": 70,
+      "statements": 70,
+      "lines": 70
+    }
+  },
+  "moduleNameMapper": {
+    "^@common/(.*)$": "<rootDir>/src/common/$1",
+    "^@modules/(.*)$": "<rootDir>/src/modules/$1",
+    "^@application/(.*)$": "<rootDir>/src/application/$1",
+    "^@infra/(.*)$": "<rootDir>/src/infra/$1",
+    "^@domain/(.*)$": "<rootDir>/src/domain/$1",
+    "^@api/(.*)$": "<rootDir>/src/api/$1"
+  },
+  "setupFilesAfterEnv": ["./jest.setup.js"]
+}
